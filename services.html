@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Layanan — TRIA LAB</title>
+<meta name="description" content="Website Ready, Custom Website, dan Web Application — solusi digital dari TRIA LAB." />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<div id="navbar-root"></div>
+
+<main>
+  <div class="page-header">
+    <div class="container">
+      <h1>Solusi Digital untuk Bisnis Anda</h1>
+      <p>Dari website siap pakai hingga sistem custom, TRIA LAB menyesuaikan dengan kebutuhan Anda.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="service-grid" id="services-grid"></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="cta-section">
+      <h2>Belum yakin layanan mana yang cocok?</h2>
+      <p>Ceritakan kebutuhan bisnis Anda, tim TRIA LAB akan membantu menentukan solusi yang paling tepat.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-primary" data-whatsapp-cta>Konsultasi via WhatsApp</a>
+        <a href="pricing.html" class="btn btn-outline">Lihat Pricing</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-root"></div>
+
+<script type="module">
+  import { renderNavbar } from "./assets/js/components/navbar.js";
+  import { renderFooter } from "./assets/js/components/footer.js";
+  renderNavbar("services");
+  renderFooter();
+</script>
+<script type="module" src="assets/js/pages/services.js"></script>
+<script type="module">
+  import { buildWhatsappLink, consultationMessage } from "./assets/js/utils/whatsapp.js";
+  document.querySelectorAll("[data-whatsapp-cta]").forEach((el) => {
+    el.setAttribute("href", buildWhatsappLink(consultationMessage()));
+    el.setAttribute("target", "_blank");
+    el.setAttribute("rel", "noopener");
+  });
+</script>
+</body>
+</html>

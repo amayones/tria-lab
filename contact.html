@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — TRIA LAB</title>
+<meta name="description" content="Konsultasikan kebutuhan website Anda bersama TRIA LAB melalui WhatsApp atau form kontak." />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<div id="navbar-root"></div>
+
+<main>
+  <div class="page-header">
+    <div class="container">
+      <h1>Konsultasikan Kebutuhan Anda</h1>
+      <p>Ceritakan kebutuhan website atau sistem bisnis Anda, tim TRIA LAB siap membantu.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container contact-wrap">
+      <div>
+        <div class="contact-card">
+          <h3>WhatsApp</h3>
+          <p>Cara tercepat untuk konsultasi langsung dengan tim TRIA LAB.</p>
+          <a href="#" class="btn btn-whatsapp" data-whatsapp-cta>Chat via WhatsApp</a>
+        </div>
+        <div class="contact-card">
+          <h3>Email</h3>
+          <p>Untuk pertanyaan detail atau pengiriman referensi.</p>
+          <a href="mailto:hello@trialab.studio" class="btn btn-outline">hello@trialab.studio</a>
+        </div>
+        <div class="contact-card">
+          <h3>Jam Operasional</h3>
+          <p>Senin – Sabtu, 09.00 – 18.00 WIB</p>
+        </div>
+      </div>
+
+      <form class="contact-card" id="contact-form" style="margin-bottom:0;">
+        <h3>Kirim Pesan</h3>
+        <p>Pesan Anda akan diteruskan langsung ke WhatsApp TRIA LAB.</p>
+        <div class="form-field">
+          <label for="contact-name">Nama</label>
+          <input type="text" id="contact-name" placeholder="Nama Anda" required />
+        </div>
+        <div class="form-field">
+          <label for="contact-message">Kebutuhan Website</label>
+          <textarea id="contact-message" rows="5" placeholder="Ceritakan kebutuhan website atau sistem Anda..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Kirim via WhatsApp</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div id="footer-root"></div>
+
+<script type="module">
+  import { renderNavbar } from "./assets/js/components/navbar.js";
+  import { renderFooter } from "./assets/js/components/footer.js";
+  renderNavbar("contact");
+  renderFooter();
+</script>
+<script type="module" src="assets/js/pages/contact.js"></script>
+</body>
+</html>

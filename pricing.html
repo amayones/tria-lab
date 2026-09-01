@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pricing — TRIA LAB</title>
+<meta name="description" content="Paket harga transparan untuk website bisnis Anda dari TRIA LAB." />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<div id="navbar-root"></div>
+
+<main>
+  <div class="page-header">
+    <div class="container">
+      <h1>Pricing</h1>
+      <p>Pilih paket yang sesuai dengan kebutuhan dan skala bisnis Anda.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div class="pricing-grid" id="pricing-grid"></div>
+      <p class="pricing-note">Domain dan hosting dapat ditambahkan sesuai kebutuhan.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="cta-section">
+      <h2>Butuh paket yang lebih spesifik?</h2>
+      <p>Konsultasikan kebutuhan Anda dan dapatkan penawaran yang sesuai.</p>
+      <div class="cta-actions">
+        <a href="contact.html" class="btn btn-primary">Konsultasikan Kebutuhan</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-root"></div>
+
+<script type="module">
+  import { renderNavbar } from "./assets/js/components/navbar.js";
+  import { renderFooter } from "./assets/js/components/footer.js";
+  renderNavbar("pricing");
+  renderFooter();
+</script>
+<script type="module" src="assets/js/pages/pricing.js"></script>
+</body>
+</html>

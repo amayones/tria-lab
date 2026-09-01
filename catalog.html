@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Website Catalog — TRIA LAB</title>
+<meta name="description" content="Pilih desain website yang paling sesuai dengan bisnis Anda dari katalog TRIA LAB." />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<div id="navbar-root"></div>
+
+<main>
+  <div class="page-header">
+    <div class="container">
+      <h1>Website Catalog</h1>
+      <p>Pilih desain yang paling sesuai dengan bisnis Anda.</p>
+    </div>
+  </div>
+
+  <section style="padding-top:40px;">
+    <div class="container">
+      <div class="catalog-toolbar">
+        <div class="filter-chips" id="filter-chips"></div>
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="text" id="catalog-search" placeholder="Cari website..." />
+        </div>
+      </div>
+
+      <div class="grid-cards" id="catalog-grid"></div>
+
+      <div class="empty-state" id="catalog-empty" style="display:none;">
+        <h3>Tidak ada website ditemukan</h3>
+        <p>Coba ubah kata kunci pencarian atau pilih kategori lain.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="footer-root"></div>
+
+<script type="module">
+  import { renderNavbar } from "./assets/js/components/navbar.js";
+  import { renderFooter } from "./assets/js/components/footer.js";
+  renderNavbar("catalog");
+  renderFooter();
+</script>
+<script type="module" src="assets/js/pages/catalog.js"></script>
+</body>
+</html>

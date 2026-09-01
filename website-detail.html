@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Detail Website — TRIA LAB</title>
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<div id="navbar-root"></div>
+
+<main id="detail-main">
+  <div class="detail-header">
+    <div class="container">
+      <p class="detail-crumb"><a href="catalog.html">Catalog</a> / <span id="detail-title-crumb">Detail</span></p>
+      <div class="detail-top">
+        <div>
+          <p class="detail-code" id="detail-code">TRIA-000</p>
+          <h1 class="detail-title" id="detail-title">Nama Website</h1>
+          <div class="detail-meta">Category: <strong id="detail-category">-</strong></div>
+        </div>
+        <div class="detail-price-box">
+          <div class="detail-price" id="detail-price">Rp0</div>
+          <small>Harga mulai</small>
+        </div>
+      </div>
+
+      <div class="device-tabs">
+        <button class="device-tab active" data-device="desktop">Desktop</button>
+        <button class="device-tab" data-device="tablet">Tablet</button>
+        <button class="device-tab" data-device="mobile">Mobile</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="device-preview">
+      <div class="device-frame desktop" id="device-frame"></div>
+    </div>
+
+    <div class="detail-sections">
+      <div>
+        <div class="detail-block">
+          <h3>Features</h3>
+          <ul class="check-list" id="detail-features"></ul>
+        </div>
+        <div class="detail-block">
+          <h3>Yang Anda Dapatkan</h3>
+          <ul class="check-list" id="detail-included"></ul>
+        </div>
+        <div class="detail-block">
+          <h3>Cocok Untuk</h3>
+          <div class="pill-list" id="detail-suited"></div>
+        </div>
+      </div>
+
+      <aside class="detail-sidebar">
+        <small style="color:var(--muted);">Harga mulai dari</small>
+        <div class="detail-price" id="sidebar-price">Rp0</div>
+        <a href="#" class="btn btn-primary btn-block" data-order-cta>Pesan Website Ini</a>
+        <a href="#" class="btn btn-outline btn-block" data-demo-cta>Lihat Live Demo</a>
+      </aside>
+    </div>
+
+    <section id="related-section" style="padding-top:0;">
+      <div class="section-head">
+        <h2>Website Serupa</h2>
+      </div>
+      <div class="grid-cards grid-cards--3" id="related-grid"></div>
+    </section>
+  </div>
+</main>
+
+<div id="footer-root"></div>
+
+<script type="module">
+  import { renderNavbar } from "./assets/js/components/navbar.js";
+  import { renderFooter } from "./assets/js/components/footer.js";
+  renderNavbar("catalog");
+  renderFooter();
+</script>
+<script type="module" src="assets/js/pages/detail.js"></script>
+</body>
+</html>
