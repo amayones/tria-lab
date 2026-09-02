@@ -9,7 +9,7 @@ export function renderFooter() {
       <div class="container">
         <div class="footer__top">
           <div class="footer__brand">
-            <a href="index.html" class="brand">
+            <a href="/" class="brand">
               <img src="assets/img/tria-lab-icon.png" alt="" width="30" height="30" />
               <span>TRIA LAB</span>
             </a>
@@ -18,11 +18,11 @@ export function renderFooter() {
           <div>
             <h4>Navigasi</h4>
             <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="catalog.html">Catalog</a></li>
-              <li><a href="services.html">Services</a></li>
-              <li><a href="pricing.html">Pricing</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/catalog">Catalog</a></li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/pricing">Pricing</a></li>
+              <li><a href="/contact">Contact</a></li>
             </ul>
           </div>
           <div>

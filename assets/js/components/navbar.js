@@ -7,11 +7,11 @@ export function renderNavbar(activePage = "") {
   if (!root) return;
 
   const links = [
-    { href: "index.html", label: "Home", key: "home" },
-    { href: "catalog.html", label: "Catalog", key: "catalog" },
-    { href: "services.html", label: "Services", key: "services" },
-    { href: "pricing.html", label: "Pricing", key: "pricing" },
-    { href: "contact.html", label: "Contact", key: "contact" },
+    { href: "/", label: "Home", key: "home" },
+    { href: "/catalog", label: "Catalog", key: "catalog" },
+    { href: "/services", label: "Services", key: "services" },
+    { href: "/pricing", label: "Pricing", key: "pricing" },
+    { href: "/contact", label: "Contact", key: "contact" },
   ];
 
   const linkHtml = (extraClass = "") =>
@@ -25,13 +25,13 @@ export function renderNavbar(activePage = "") {
   root.innerHTML = `
     <nav class="navbar">
       <div class="navbar__inner">
-        <a href="index.html" class="brand">
+        <a href="/" class="brand">
           <img src="assets/img/tria-lab-icon.png" alt="" width="30" height="30" />
           <span>TRIA LAB</span>
         </a>
         <div class="nav-links">${linkHtml()}</div>
         <div class="navbar__actions">
-          <a href="catalog.html" class="btn btn-primary btn-sm">Lihat Katalog</a>
+          <a href="/catalog" class="btn btn-primary btn-sm">Lihat Katalog</a>
           <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu" aria-expanded="false">
             <span></span><span></span><span></span>
           </button>
@@ -41,8 +41,8 @@ export function renderNavbar(activePage = "") {
     <div class="mobile-menu" id="mobile-menu">
       ${linkHtml()}
       <div class="mobile-actions">
-        <a href="catalog.html" class="btn btn-primary btn-block">Lihat Katalog</a>
-        <a href="contact.html" class="btn btn-outline btn-block">Konsultasi</a>
+        <a href="/catalog" class="btn btn-primary btn-block">Lihat Katalog</a>
+        <a href="/contact" class="btn btn-outline btn-block">Konsultasi</a>
       </div>
     </div>
   `;

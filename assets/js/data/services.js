@@ -11,7 +11,7 @@ export const SERVICES = [
       "Harga lebih terjangkau",
     ],
     cta: "Lihat Katalog",
-    ctaHref: "catalog.html",
+    ctaHref: "/catalog",
   },
   {
     id: "custom-website",
@@ -25,7 +25,7 @@ export const SERVICES = [
       "Cocok untuk kebutuhan yang lebih spesifik",
     ],
     cta: "Konsultasikan Kebutuhan",
-    ctaHref: "contact.html",
+    ctaHref: "/contact",
   },
   {
     id: "web-application",
@@ -39,6 +39,6 @@ export const SERVICES = [
       "Integrasi API dan payment gateway",
     ],
     cta: "Konsultasikan Kebutuhan",
-    ctaHref: "contact.html",
+    ctaHref: "/contact",
   },
 ];

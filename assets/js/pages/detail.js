@@ -6,8 +6,16 @@ import { websiteCardHtml } from "../components/website-card.js";
 const CHECK_SVG = `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 10.5l3 3 7-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 function getCodeFromUrl() {
+  // clean URL: /detail/TRIA-001
+  const path = window.location.pathname;
+  if (path.startsWith("/detail/")) {
+    const seg = path.split("/").pop();
+    if (seg && seg.startsWith("TRIA-")) return seg;
+  }
   const params = new URLSearchParams(window.location.search);
-  return params.get("code");
+  if (params.get("code")) return params.get("code");
+  // also support hash fallback
+  return null;
 }
 
 function renderNotFound() {
@@ -18,7 +26,7 @@ function renderNotFound() {
     <div class="empty-state container">
       <h3>Website tidak ditemukan</h3>
       <p>Produk yang Anda cari mungkin sudah tidak tersedia.</p>
-      <a href="catalog.html" class="btn btn-primary" style="margin-top:16px;">Kembali ke Katalog</a>
+      <a href="/catalog" class="btn btn-primary" style="margin-top:16px;">Kembali ke Katalog</a>
     </div>
   `;
 }

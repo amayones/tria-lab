@@ -27,13 +27,13 @@ export function websiteCardHtml(site, opts = {}) {
 
   return `
     <article class="wcard">
-      <a href="website-detail.html?code=${site.code}" class="wcard__thumb">
+      <a href="/detail/${site.code}" class="wcard__thumb">
         <span class="wcard__code">${site.code}</span>
         <img src="${thumbSrc}" alt="Preview website ${site.name}" loading="lazy" />
       </a>
       <div class="wcard__body">
         <span class="wcard__cat">${site.category}</span>
-        <a href="website-detail.html?code=${site.code}">
+        <a href="/detail/${site.code}">
           <h3 class="wcard__name">${site.name}</h3>
         </a>
         <p class="wcard__desc">${site.description}</p>
@@ -44,7 +44,7 @@ export function websiteCardHtml(site, opts = {}) {
         </div>
         <div class="wcard__actions">
           <a href="${thumbSrc}" class="btn btn-outline" target="_blank" rel="noopener">Live Demo</a>
-          <a href="website-detail.html?code=${site.code}" class="btn btn-primary">Lihat Detail</a>
+          <a href="/detail/${site.code}" class="btn btn-primary">Lihat Detail</a>
         </div>
       </div>
     </article>

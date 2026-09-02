@@ -19,7 +19,7 @@ export function priceCardHtml(plan) {
       <ul>
         ${plan.features.map((f) => `<li>${CHECK_SVG}${f}</li>`).join("")}
       </ul>
-      <a href="contact.html?plan=${encodeURIComponent(plan.name)}" class="btn ${plan.featured ? "btn-primary" : "btn-outline"} btn-block">
+      <a href="/contact?plan=${encodeURIComponent(plan.name)}" class="btn ${plan.featured ? "btn-primary" : "btn-outline"} btn-block">
         Konsultasikan Kebutuhan
       </a>
     </div>
