@@ -50,25 +50,63 @@ function getPreviewForDevice(site, device) {
   return site.preview;
 }
 
+function preloadImage(src) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      if (img.decode) img.decode().then(resolve).catch(() => resolve());
+      else resolve();
+    };
+    img.onerror = () => resolve();
+    img.src = src;
+  });
+}
+
 function wireDeviceTabs(site) {
   const tabs = document.querySelectorAll(".device-tab");
   const frame = document.getElementById("device-frame");
   if (!tabs.length || !frame) return;
+  let isAnimating = false;
   tabs.forEach((tab) => {
     if (tab.dataset.wired === "1") return;
     tab.dataset.wired = "1";
-    tab.addEventListener("click", () => {
+    tab.addEventListener("click", async () => {
       const device = tab.dataset.device;
+      if (tab.classList.contains("active") || isAnimating) return;
+      isAnimating = true;
       tabs.forEach((t) => t.classList.remove("active"));
       tab.classList.add("active");
-      frame.className = `device-frame ${device}`;
       const src = getPreviewForDevice(site, device);
-      frame.innerHTML = `<img src="${src}" alt="Preview ${device} ${site.name}" />`;
+      // preload first to avoid white flash
+      frame.classList.add("is-switching");
+      await preloadImage(src);
+      // wait for fade out
+      await new Promise((r) => setTimeout(r, 120));
+      frame.className = `device-frame ${device} is-switching`;
+      frame.innerHTML = `<img src="${src}" alt="Preview ${device} ${site.name}" style="opacity:0" />`;
+      // force reflow
+      void frame.offsetWidth;
+      frame.classList.remove("is-switching");
+      frame.classList.add("is-entering");
       document.querySelectorAll("[data-demo-cta]").forEach((el) => {
         el.setAttribute("href", src);
       });
+      setTimeout(() => {
+        frame.classList.remove("is-entering");
+        const img = frame.querySelector("img");
+        if (img) img.style.opacity = "";
+        isAnimating = false;
+      }, 400);
     });
   });
+  // idle preload other devices for instant next switch
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(() => {
+      ["tablet", "mobile"].forEach((d) => preloadImage(getPreviewForDevice(site, d)));
+    });
+  } else {
+    setTimeout(() => ["tablet", "mobile"].forEach((d) => preloadImage(getPreviewForDevice(site, d))), 800);
+  }
 }
 
 function render() {
