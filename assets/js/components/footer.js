@@ -10,7 +10,7 @@ export function renderFooter() {
         <div class="footer__top">
           <div class="footer__brand">
             <a href="/" class="brand">
-              <img src="assets/img/tria-lab-icon.png" alt="" width="30" height="30" />
+              <img src="/assets/img/tria-lab-icon.png" alt="" width="30" height="30" />
               <span>TRIA LAB</span>
             </a>
             <p>Website &amp; Digital Solutions</p>

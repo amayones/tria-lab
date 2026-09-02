@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Contact — TRIA LAB</title>
 <meta name="description" content="Konsultasikan kebutuhan website Anda bersama TRIA LAB melalui WhatsApp atau form kontak." />
-<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="icon" type="image/png" href="/assets/img/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/css/style.css" />
+<link rel="stylesheet" href="/assets/css/style.css" />
 </head>
 <body>
 <div id="progress-bar" aria-hidden="true"></div>
@@ -62,14 +62,14 @@
 <div id="footer-root"></div>
 
 <script type="module">
-  import { renderNavbar } from "./assets/js/components/navbar.js";
-  import { renderFooter } from "./assets/js/components/footer.js";
+  import { renderNavbar } from "/assets/js/components/navbar.js";
+  import { renderFooter } from "/assets/js/components/footer.js";
   renderNavbar("contact");
   renderFooter();
 </script>
-<script type="module" src="assets/js/utils/router.js"></script>
+<script type="module" src="/assets/js/utils/router.js"></script>
 <script type="module">
-  import { initContact } from "./assets/js/pages/contact.js";
+  import { initContact } from "/assets/js/pages/contact.js";
   initContact();
 </script>
 </body>

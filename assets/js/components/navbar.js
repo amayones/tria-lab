@@ -26,7 +26,7 @@ export function renderNavbar(activePage = "") {
     <nav class="navbar">
       <div class="navbar__inner">
         <a href="/" class="brand">
-          <img src="assets/img/tria-lab-icon.png" alt="" width="30" height="30" />
+          <img src="/assets/img/tria-lab-icon.png" alt="" width="30" height="30" />
           <span>TRIA LAB</span>
         </a>
         <div class="nav-links">${linkHtml()}</div>

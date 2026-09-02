@@ -22,7 +22,7 @@ export const WEBSITES = [
     price: 1499000,
     description: "Website hangat dan modern untuk coffee shop dengan menu digital dan galeri suasana.",
     tags: ["Responsive", "WhatsApp", "Google Maps", "Gallery"],
-    preview: "assets/img/previews/coffee-1.svg",
+    preview: "/assets/img/previews/coffee-1.svg",
     features: [
       "Responsive Design",
       "WhatsApp Integration",
@@ -49,7 +49,7 @@ export const WEBSITES = [
     price: 1799000,
     description: "Tampilkan menu andalan dan reservasi restoran dengan desain yang menggugah selera.",
     tags: ["Responsive", "WhatsApp", "Gallery", "Menu Digital"],
-    preview: "assets/img/previews/restaurant-1.svg",
+    preview: "/assets/img/previews/restaurant-1.svg",
     features: [
       "Responsive Design",
       "Digital Menu",
@@ -76,7 +76,7 @@ export const WEBSITES = [
     price: 2199000,
     description: "Profil perusahaan yang meyakinkan dengan struktur konten yang jelas dan profesional.",
     tags: ["Responsive", "WhatsApp", "Portfolio", "SEO"],
-    preview: "assets/img/previews/company-1.svg",
+    preview: "/assets/img/previews/company-1.svg",
     features: [
       "Responsive Design",
       "Company Profile Sections",
@@ -103,7 +103,7 @@ export const WEBSITES = [
     price: 2499000,
     description: "Katalog properti dengan tampilan unit, harga, dan lokasi yang mudah dijelajahi calon pembeli.",
     tags: ["Responsive", "WhatsApp", "Google Maps", "Unit Listing"],
-    preview: "assets/img/previews/property-1.svg",
+    preview: "/assets/img/previews/property-1.svg",
     features: [
       "Responsive Design",
       "Unit / Listing Grid",
@@ -130,7 +130,7 @@ export const WEBSITES = [
     price: 2299000,
     description: "Website klinik dengan jadwal layanan, dokter, dan booking konsultasi via WhatsApp.",
     tags: ["Responsive", "WhatsApp", "Schedule", "Gallery"],
-    preview: "assets/img/previews/clinic-1.svg",
+    preview: "/assets/img/previews/clinic-1.svg",
     features: [
       "Responsive Design",
       "Service Schedule",
@@ -157,7 +157,7 @@ export const WEBSITES = [
     price: 2199000,
     description: "Website lembaga pendidikan dengan informasi program, jadwal, dan pendaftaran online.",
     tags: ["Responsive", "WhatsApp", "Program List", "SEO"],
-    preview: "assets/img/previews/education-1.svg",
+    preview: "/assets/img/previews/education-1.svg",
     features: [
       "Responsive Design",
       "Program / Course List",
@@ -185,11 +185,11 @@ export const WEBSITES = [
     description:
       "Sistem bioskop online lengkap — React + Tailwind & Laravel, booking kursi real-time, manajemen film/studio/jadwal, pembayaran QRIS & Cash, dashboard Admin/Owner/Kasir, QR scanner & cetak tiket.",
     tags: ["React", "Laravel", "Tailwind", "Cinema Booking", "QRIS", "Sanctum Auth"],
-    preview: "assets/img/previews-catalog/nexusreel.jpg",
+    preview: "/assets/img/previews-catalog/nexusreel.jpg",
     previews: {
-      desktop: "assets/img/previews-catalog/nexusreel-desktop.png",
-      tablet: "assets/img/previews-catalog/nexusreel-tablet.png",
-      mobile: "assets/img/previews-catalog/nexusreel-mobile.png",
+      desktop: "/assets/img/previews-catalog/nexusreel-desktop.png",
+      tablet: "/assets/img/previews-catalog/nexusreel-tablet.png",
+      mobile: "/assets/img/previews-catalog/nexusreel-mobile.png",
     },
     features: [
       "React 19 + Vite + Tailwind 4 (Frontend)",
@@ -221,11 +221,11 @@ export const WEBSITES = [
     description:
       "Platform cloud storage modern terintegrasi Google Drive via OAuth 2.0 — Vue 3 + Tailwind & FastAPI, upload streaming hingga 1GB+, manajemen file lengkap, dashboard kuota real-time & AI assistant Mistral.",
     tags: ["Vue 3", "FastAPI", "Google Drive API", "OAuth 2.0", "Mistral AI", "Responsive"],
-    preview: "assets/img/previews-catalog/kendrive.jpg",
+    preview: "/assets/img/previews-catalog/kendrive.jpg",
     previews: {
-      desktop: "assets/img/previews-catalog/kendrive-desktop.png",
-      tablet: "assets/img/previews-catalog/kendrive-tablet.png",
-      mobile: "assets/img/previews-catalog/kendrive-mobile.png",
+      desktop: "/assets/img/previews-catalog/kendrive-desktop.png",
+      tablet: "/assets/img/previews-catalog/kendrive-tablet.png",
+      mobile: "/assets/img/previews-catalog/kendrive-mobile.png",
     },
     features: [
       "Vue 3 + Vite + Tailwind (Frontend)",
