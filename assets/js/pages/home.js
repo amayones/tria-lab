@@ -17,5 +17,10 @@ function wireWhatsappLinks() {
   });
 }
 
-renderFeaturedCatalog();
-wireWhatsappLinks();
+export function initHome() {
+  renderFeaturedCatalog();
+  wireWhatsappLinks();
+}
+
+// auto-init for hard load (non-router fallback)
+if (!window.__routerEnabled) initHome();

@@ -26,9 +26,9 @@ function render() {
 
   if (results.length === 0) {
     grid.innerHTML = "";
-    empty.style.display = "block";
+    if (empty) empty.style.display = "block";
   } else {
-    empty.style.display = "none";
+    if (empty) empty.style.display = "none";
     grid.innerHTML = results.map((site) => websiteCardHtml(site)).join("");
   }
 }
@@ -57,6 +57,9 @@ function renderChips() {
 function wireSearch() {
   const input = document.getElementById("catalog-search");
   if (!input) return;
+  // avoid double listener after router re-init: clone if already wired
+  if (input.dataset.wired === "1") return;
+  input.dataset.wired = "1";
   input.addEventListener("input", (e) => {
     state.query = e.target.value;
     render();
@@ -68,10 +71,21 @@ function applyUrlCategory() {
   const cat = params.get("category");
   if (cat && (cat === "Semua" || CATEGORIES.includes(cat))) {
     state.category = cat;
+  } else {
+    state.category = "Semua";
   }
+  // also restore query from input if any
+  const input = document.getElementById("catalog-search");
+  if (input) state.query = input.value || "";
 }
 
-applyUrlCategory();
-renderChips();
-wireSearch();
-render();
+export function initCatalog() {
+  applyUrlCategory();
+  renderChips();
+  wireSearch();
+  render();
+}
+
+if (!window.__routerEnabled) {
+  initCatalog();
+}

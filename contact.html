@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-
+<div id="progress-bar" aria-hidden="true"></div>
 <div id="navbar-root"></div>
 
-<main>
+<main id="app">
   <div class="page-header">
     <div class="container">
       <h1>Konsultasikan Kebutuhan Anda</h1>
@@ -67,6 +67,10 @@
   renderNavbar("contact");
   renderFooter();
 </script>
-<script type="module" src="assets/js/pages/contact.js"></script>
+<script type="module" src="assets/js/utils/router.js"></script>
+<script type="module">
+  import { initContact } from "./assets/js/pages/contact.js";
+  initContact();
+</script>
 </body>
 </html>

@@ -11,8 +11,10 @@ function getCodeFromUrl() {
 }
 
 function renderNotFound() {
-  const main = document.getElementById("detail-main");
-  main.innerHTML = `
+  const main = document.getElementById("detail-main") || document.querySelector("main#app");
+  if (!main) return;
+  const target = document.getElementById("detail-main") || main;
+  target.innerHTML = `
     <div class="empty-state container">
       <h3>Website tidak ditemukan</h3>
       <p>Produk yang Anda cari mungkin sudah tidak tersedia.</p>
@@ -30,6 +32,7 @@ function renderRelated(site) {
     if (section) section.style.display = "none";
     return;
   }
+  if (section) section.style.display = "";
   grid.innerHTML = related.map((w) => websiteCardHtml(w)).join("");
 }
 
@@ -42,7 +45,10 @@ function getPreviewForDevice(site, device) {
 function wireDeviceTabs(site) {
   const tabs = document.querySelectorAll(".device-tab");
   const frame = document.getElementById("device-frame");
+  if (!tabs.length || !frame) return;
   tabs.forEach((tab) => {
+    if (tab.dataset.wired === "1") return;
+    tab.dataset.wired = "1";
     tab.addEventListener("click", () => {
       const device = tab.dataset.device;
       tabs.forEach((t) => t.classList.remove("active"));
@@ -50,7 +56,6 @@ function wireDeviceTabs(site) {
       frame.className = `device-frame ${device}`;
       const src = getPreviewForDevice(site, device);
       frame.innerHTML = `<img src="${src}" alt="Preview ${device} ${site.name}" />`;
-      // Update Live Demo link to current device image
       document.querySelectorAll("[data-demo-cta]").forEach((el) => {
         el.setAttribute("href", src);
       });
@@ -69,25 +74,36 @@ function render() {
 
   document.title = `${site.name} — TRIA LAB`;
 
-  document.getElementById("detail-code").textContent = site.code;
-  document.getElementById("detail-title").textContent = site.name;
-  document.getElementById("detail-category").textContent = site.category;
-  document.getElementById("detail-price").textContent = formatRupiah(site.price);
-  document.getElementById("sidebar-price").textContent = formatRupiah(site.price);
-  // Initial preview — desktop by default
-  document.getElementById("device-frame").innerHTML = `<img src="${getPreviewForDevice(site, "desktop")}" alt="Preview desktop ${site.name}" />`;
+  const elCode = document.getElementById("detail-code");
+  const elTitle = document.getElementById("detail-title");
+  const elCat = document.getElementById("detail-category");
+  const elPrice = document.getElementById("detail-price");
+  const elSidePrice = document.getElementById("sidebar-price");
+  const elFrame = document.getElementById("device-frame");
+  const elFeatures = document.getElementById("detail-features");
+  const elIncluded = document.getElementById("detail-included");
+  const elSuited = document.getElementById("detail-suited");
+  const crumb = document.getElementById("detail-title-crumb");
 
-  document.getElementById("detail-features").innerHTML = site.features
-    .map((f) => `<li>${CHECK_SVG}${f}</li>`)
-    .join("");
+  if (elCode) elCode.textContent = site.code;
+  if (elTitle) elTitle.textContent = site.name;
+  if (elCat) elCat.textContent = site.category;
+  if (crumb) crumb.textContent = site.name;
+  if (elPrice) elPrice.textContent = formatRupiah(site.price);
+  if (elSidePrice) elSidePrice.textContent = formatRupiah(site.price);
+  if (elFrame) elFrame.innerHTML = `<img src="${getPreviewForDevice(site, "desktop")}" alt="Preview desktop ${site.name}" />`;
 
-  document.getElementById("detail-included").innerHTML = site.included
-    .map((f) => `<li>${CHECK_SVG}${f}</li>`)
-    .join("");
+  if (elFeatures) elFeatures.innerHTML = site.features
+      .map((f) => `<li>${CHECK_SVG}${f}</li>`)
+      .join("");
 
-  document.getElementById("detail-suited").innerHTML = site.suitedFor
-    .map((f) => `<span>${f}</span>`)
-    .join("");
+  if (elIncluded) elIncluded.innerHTML = site.included
+      .map((f) => `<li>${CHECK_SVG}${f}</li>`)
+      .join("");
+
+  if (elSuited) elSuited.innerHTML = site.suitedFor
+      .map((f) => `<span>${f}</span>`)
+      .join("");
 
   const waLink = buildWhatsappLink(orderMessage(site));
   document.querySelectorAll("[data-order-cta]").forEach((el) => {
@@ -105,4 +121,8 @@ function render() {
   renderRelated(site);
 }
 
-render();
+export function initDetail() {
+  render();
+}
+
+if (!window.__routerEnabled) render();

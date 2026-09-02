@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-
+<div id="progress-bar" aria-hidden="true"></div>
 <div id="navbar-root"></div>
 
-<main>
+<main id="app">
   <div class="page-header">
     <div class="container">
       <h1>Pricing</h1>
@@ -49,6 +49,10 @@
   renderNavbar("pricing");
   renderFooter();
 </script>
-<script type="module" src="assets/js/pages/pricing.js"></script>
+<script type="module" src="assets/js/utils/router.js"></script>
+<script type="module">
+  import { initPricing } from "./assets/js/pages/pricing.js";
+  initPricing();
+</script>
 </body>
 </html>

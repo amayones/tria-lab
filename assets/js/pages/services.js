@@ -1,4 +1,5 @@
 import { SERVICES } from "../data/services.js";
+import { buildWhatsappLink, consultationMessage } from "../utils/whatsapp.js";
 
 const ICONS = {
   layout: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>`,
@@ -28,4 +29,17 @@ function render() {
   grid.innerHTML = SERVICES.map(serviceCardHtml).join("");
 }
 
-render();
+function wireWhatsapp() {
+  document.querySelectorAll("[data-whatsapp-cta]").forEach((el) => {
+    el.setAttribute("href", buildWhatsappLink(consultationMessage()));
+    el.setAttribute("target", "_blank");
+    el.setAttribute("rel", "noopener");
+  });
+}
+
+export function initServices() {
+  render();
+  wireWhatsapp();
+}
+
+if (!window.__routerEnabled) render();

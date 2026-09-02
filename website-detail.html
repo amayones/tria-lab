@@ -11,10 +11,11 @@
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-
+<div id="progress-bar" aria-hidden="true"></div>
 <div id="navbar-root"></div>
 
-<main id="detail-main">
+<main id="app">
+  <div id="detail-main">
   <div class="detail-header">
     <div class="container">
       <p class="detail-crumb"><a href="catalog.html">Catalog</a> / <span id="detail-title-crumb">Detail</span></p>
@@ -74,6 +75,7 @@
       <div class="grid-cards grid-cards--3" id="related-grid"></div>
     </section>
   </div>
+  </div>
 </main>
 
 <div id="footer-root"></div>
@@ -84,6 +86,10 @@
   renderNavbar("catalog");
   renderFooter();
 </script>
-<script type="module" src="assets/js/pages/detail.js"></script>
+<script type="module" src="assets/js/utils/router.js"></script>
+<script type="module">
+  import { initDetail } from "./assets/js/pages/detail.js";
+  initDetail();
+</script>
 </body>
 </html>

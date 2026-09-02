@@ -7,4 +7,8 @@ function render() {
   grid.innerHTML = PRICING_PLANS.map((plan) => priceCardHtml(plan)).join("");
 }
 
-render();
+export function initPricing() {
+  render();
+}
+
+if (!window.__routerEnabled) render();

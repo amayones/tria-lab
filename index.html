@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-
+<div id="progress-bar" aria-hidden="true"></div>
 <div id="navbar-root"></div>
 
-<main>
+<main id="app">
   <!-- HERO -->
   <section class="hero">
     <div class="container hero__grid">
@@ -177,6 +177,10 @@
   renderNavbar("home");
   renderFooter();
 </script>
-<script type="module" src="assets/js/pages/home.js"></script>
+<script type="module" src="assets/js/utils/router.js"></script>
+<script type="module">
+  import { initHome } from "./assets/js/pages/home.js";
+  initHome();
+</script>
 </body>
 </html>

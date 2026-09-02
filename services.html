@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-
+<div id="progress-bar" aria-hidden="true"></div>
 <div id="navbar-root"></div>
 
-<main>
+<main id="app">
   <div class="page-header">
     <div class="container">
       <h1>Solusi Digital untuk Bisnis Anda</h1>
@@ -49,14 +49,10 @@
   renderNavbar("services");
   renderFooter();
 </script>
-<script type="module" src="assets/js/pages/services.js"></script>
+<script type="module" src="assets/js/utils/router.js"></script>
 <script type="module">
-  import { buildWhatsappLink, consultationMessage } from "./assets/js/utils/whatsapp.js";
-  document.querySelectorAll("[data-whatsapp-cta]").forEach((el) => {
-    el.setAttribute("href", buildWhatsappLink(consultationMessage()));
-    el.setAttribute("target", "_blank");
-    el.setAttribute("rel", "noopener");
-  });
+  import { initServices } from "./assets/js/pages/services.js";
+  initServices();
 </script>
 </body>
 </html>
