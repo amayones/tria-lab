@@ -33,14 +33,27 @@ function renderRelated(site) {
   grid.innerHTML = related.map((w) => websiteCardHtml(w)).join("");
 }
 
+function getPreviewForDevice(site, device) {
+  if (site.previews && site.previews[device]) return site.previews[device];
+  // fallback to legacy single preview
+  return site.preview;
+}
+
 function wireDeviceTabs(site) {
   const tabs = document.querySelectorAll(".device-tab");
   const frame = document.getElementById("device-frame");
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
+      const device = tab.dataset.device;
       tabs.forEach((t) => t.classList.remove("active"));
       tab.classList.add("active");
-      frame.className = `device-frame ${tab.dataset.device}`;
+      frame.className = `device-frame ${device}`;
+      const src = getPreviewForDevice(site, device);
+      frame.innerHTML = `<img src="${src}" alt="Preview ${device} ${site.name}" />`;
+      // Update Live Demo link to current device image
+      document.querySelectorAll("[data-demo-cta]").forEach((el) => {
+        el.setAttribute("href", src);
+      });
     });
   });
 }
@@ -61,7 +74,8 @@ function render() {
   document.getElementById("detail-category").textContent = site.category;
   document.getElementById("detail-price").textContent = formatRupiah(site.price);
   document.getElementById("sidebar-price").textContent = formatRupiah(site.price);
-  document.getElementById("device-frame").innerHTML = `<img src="${site.preview}" alt="Preview desktop ${site.name}" />`;
+  // Initial preview — desktop by default
+  document.getElementById("device-frame").innerHTML = `<img src="${getPreviewForDevice(site, "desktop")}" alt="Preview desktop ${site.name}" />`;
 
   document.getElementById("detail-features").innerHTML = site.features
     .map((f) => `<li>${CHECK_SVG}${f}</li>`)
@@ -82,7 +96,7 @@ function render() {
     el.setAttribute("rel", "noopener");
   });
   document.querySelectorAll("[data-demo-cta]").forEach((el) => {
-    el.setAttribute("href", site.preview);
+    el.setAttribute("href", getPreviewForDevice(site, "desktop"));
     el.setAttribute("target", "_blank");
     el.setAttribute("rel", "noopener");
   });
