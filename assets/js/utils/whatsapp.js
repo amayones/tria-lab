@@ -2,7 +2,7 @@
  * TRIA LAB WhatsApp contact number (international format, no leading +/0).
  * Replace with the studio's real number before deploying.
  */
-export const WHATSAPP_NUMBER = "6281234567890";
+export const WHATSAPP_NUMBER = "6285691106799";
 
 /**
  * Build a wa.me link with a pre-filled message.
