@@ -1,0 +1,13 @@
+name = "trust-trialab"
+main = "assets/workers/cloudflare-rewrite.example.js"
+compatibility_date = "2024-11-01"
+
+# Serve static assets dari root (index.html, assets/, etc)
+# Worker di atas akan rewrite /catalog -> /catalog.html etc
+[assets]
+directory = "."
+not_found_handling = "none"
+
+# Build tidak perlu di wrangler.toml karena kamu pakai Cloudflare Builds:
+# Build command: npm run build
+# Deploy command: npx wrangler deploy
