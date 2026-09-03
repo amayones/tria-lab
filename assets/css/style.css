@@ -162,18 +162,15 @@ section{ padding: 96px 0; }
 
 /* ---------------- Navbar ---------------- */
 .navbar{
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
+  position: fixed;
+  top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(252,251,250,0.86);
+  background: rgba(252,251,250,0.97);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line-soft);
 }
-@media (min-width: 901px){
-  .navbar{ position: sticky; position: -webkit-sticky; top: 0; }
-}
+body{ padding-top: 76px; }
 .navbar__inner{
   max-width: var(--container);
   margin: 0 auto;
