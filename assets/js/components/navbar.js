@@ -70,3 +70,4 @@ export function renderNavbar(activePage = "") {
       ${bottomHtml}
     </nav>
   `;
+}
