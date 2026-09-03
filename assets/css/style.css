@@ -163,12 +163,16 @@ section{ padding: 96px 0; }
 /* ---------------- Navbar ---------------- */
 .navbar{
   position: sticky;
+  position: -webkit-sticky;
   top: 0;
   z-index: 100;
   background: rgba(252,251,250,0.86);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line-soft);
+}
+@media (min-width: 901px){
+  .navbar{ position: sticky; position: -webkit-sticky; top: 0; }
 }
 .navbar__inner{
   max-width: var(--container);
