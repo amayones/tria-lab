@@ -35,7 +35,7 @@ export const PRICING_PLANS = [
       "SEO optimization",
       "Integrasi sosial media & WhatsApp",
       "Gratis revisi",
-      "Maintenance 1 bulan",
+      "Maintenance 1 bulan"
     ],
     featured: false,
     ctaLabel: "Pesan Sekarang",
