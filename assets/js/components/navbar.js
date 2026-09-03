@@ -34,6 +34,25 @@ export function renderNavbar(activePage = "") {
       .join("");
 
   const asset = (p) => withBase(p);
+  const icons = {
+    home: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 10L12 3l9 7v9a2 2 0 0 1-2 2h-2a1 1 0 0 1-1-1v-4H8v4a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2v-9Z"/></svg>`,
+    catalog: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>`,
+    services: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5Z"/><path d="M2 12l10 5 10-5"/><path d="M2 17l10 5 10-5"/></svg>`,
+    pricing: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4Z"/><path d="M9.5 11.5h5"/><path d="M12 9.5v5"/></svg>`,
+    contact: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 7 9-7"/></svg>`,
+  };
+  const bottomItems = [
+    { key: "home", label: "Home", href: withBase("/"), icon: icons.home },
+    { key: "catalog", label: "Catalog", href: withBase("/catalog"), icon: icons.catalog },
+    { key: "services", label: "Services", href: withBase("/services"), icon: icons.services },
+    { key: "pricing", label: "Pricing", href: withBase("/pricing"), icon: icons.pricing },
+    { key: "contact", label: "Contact", href: withBase("/contact"), icon: icons.contact },
+  ];
+  const bottomHtml = bottomItems
+    .map(
+      (it) => `<a href="${it.href}" ${it.key === activePage ? 'aria-current="page"' : ""} aria-label="${it.label}">${it.icon}<span>${it.label}</span></a>`
+    )
+    .join("");
   root.innerHTML = `
     <nav class="navbar">
       <div class="navbar__inner">
@@ -44,31 +63,10 @@ export function renderNavbar(activePage = "") {
         <div class="nav-links">${linkHtml()}</div>
         <div class="navbar__actions">
           <a href="${withBase("/catalog")}" class="btn btn-primary btn-sm">Lihat Katalog</a>
-          <button class="nav-toggle" id="nav-toggle" aria-label="Buka menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-          </button>
         </div>
       </div>
     </nav>
-    <div class="mobile-menu" id="mobile-menu">
-      ${linkHtml()}
-      <div class="mobile-actions">
-        <a href="${withBase("/catalog")}" class="btn btn-primary btn-block">Lihat Katalog</a>
-        <a href="${withBase("/contact")}" class="btn btn-outline btn-block">Konsultasi</a>
-      </div>
-    </div>
+    <nav class="bottom-nav" id="bottom-nav" aria-label="Primary">
+      ${bottomHtml}
+    </nav>
   `;
-
-  const toggle = document.getElementById("nav-toggle");
-  const menu = document.getElementById("mobile-menu");
-  toggle.addEventListener("click", () => {
-    const isOpen = menu.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", String(isOpen));
-  });
-  menu.querySelectorAll("a").forEach((a) =>
-    a.addEventListener("click", () => {
-      menu.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-    })
-  );
-}
