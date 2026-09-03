@@ -9,6 +9,9 @@ const CHECK_SVG = `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org
  */
 export function priceCardHtml(plan) {
   const priceDisplay = typeof plan.price === "number" ? formatRupiah(plan.price) : plan.priceLabel;
+  const ctaLink = plan.ctaLink || `/contact?plan=${encodeURIComponent(plan.name)}`;
+  const ctaLabel = plan.ctaLabel || "Konsultasikan Kebutuhan";
+  const isExternal = /^https?:\/\//.test(ctaLink);
 
   return `
     <div class="price-card ${plan.featured ? "featured" : ""}">
@@ -19,8 +22,8 @@ export function priceCardHtml(plan) {
       <ul>
         ${plan.features.map((f) => `<li>${CHECK_SVG}${f}</li>`).join("")}
       </ul>
-      <a href="/contact?plan=${encodeURIComponent(plan.name)}" class="btn ${plan.featured ? "btn-primary" : "btn-outline"} btn-block">
-        Konsultasikan Kebutuhan
+      <a href="${ctaLink}" ${isExternal ? `target="_blank" rel="noopener noreferrer"` : ""} class="btn ${plan.featured ? "btn-primary" : "btn-outline"} btn-block">
+        ${ctaLabel}
       </a>
     </div>
   `;
