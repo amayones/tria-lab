@@ -7,16 +7,14 @@ const _k2 = atob("X0xBQg=="); // _LAB
 const _k3 = String.fromCharCode(50,48,50,54); // 2026
 const KEY = _k1 + _k2 + _k3; // TRIA_LAB2026
 
-function _xor(str, key) {
-  let out = "";
-  for (let i = 0; i < str.length; i++) out += String.fromCharCode(str.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-  return out;
-}
-
 export function _d(b64) {
   try {
     const bin = atob(b64);
-    return _xor(bin, KEY);
+    const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+    const keyBytes = new TextEncoder().encode(KEY);
+    const out = new Uint8Array(bytes.length);
+    for (let i = 0; i < bytes.length; i++) out[i] = bytes[i] ^ keyBytes[i % keyBytes.length];
+    return new TextDecoder().decode(out);
   } catch {
     return "";
   }

@@ -17,15 +17,13 @@ const root = path.resolve(__dirname, "..");
 const isDev = process.argv.includes("--dev");
 
 const KEY = "TRIA_LAB2026";
-function xor(str, key) {
-  let out = "";
-  for (let i = 0; i < str.length; i++) out += String.fromCharCode(str.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-  return out;
-}
 function encode(obj) {
   const json = JSON.stringify(obj, (k, v) => (v === Infinity ? "__INF__" : v));
-  const x = xor(json, KEY);
-  return Buffer.from(x, "binary").toString("base64");
+  const data = Buffer.from(json, "utf8");
+  const keyBytes = Buffer.from(KEY, "utf8");
+  const out = Buffer.alloc(data.length);
+  for (let i = 0; i < data.length; i++) out[i] = data[i] ^ keyBytes[i % keyBytes.length];
+  return out.toString("base64");
 }
 
 // ---- Load raw data via dynamic import ----
@@ -147,12 +145,12 @@ async function main() {
       rotateStringArray: true,
       numbersToExpressions: true,
       identifierNamesGenerator: "hexadecimal",
-      selfDefending: true,
+      selfDefending: false,
       disableConsoleOutput: false,
       splitStrings: true,
       splitStringsChunkLength: 5,
-      transformObjectKeys: true,
-      unicodeEscapeSequence: true,
+      transformObjectKeys: false,
+      unicodeEscapeSequence: false,
     });
     code = ob.getObfuscatedCode();
   } else {
