@@ -2,6 +2,7 @@
  * TRIA LAB — Bundled entry (mystery professional)
  * Single entry for all pages. Router handles PJAX + init.
  */
+import "./utils/router.js"; // sets window.__routerEnabled = true before page modules evaluate their if(!window.__routerEnabled) guards
 import { renderNavbar } from "./components/navbar.js";
 import { renderFooter } from "./components/footer.js";
 import { getBasePrefix, stripBase } from "./utils/base.js";
@@ -28,11 +29,19 @@ function getActivePage(pathname) {
 }
 
 function boot() {
-  const path = window.location.pathname + window.location.search;
   const active = getActivePage(window.location.pathname);
   try { renderNavbar(active); } catch {}
   try { renderFooter(); } catch {}
 
+  // DOM-based routing — reliable even when stringArray obfuscates pathname literals
+  if (document.getElementById("featured-catalog-grid")) { try { initHome(); } catch(e){console.warn(e)} return; }
+  if (document.getElementById("catalog-grid")) { try { initCatalog(); } catch(e){console.warn(e)} return; }
+  if (document.getElementById("detail-main") || document.getElementById("detail-code")) { try { initDetail(); } catch(e){console.warn(e)} return; }
+  if (document.getElementById("services-grid")) { try { initServices(); } catch(e){console.warn(e)} return; }
+  if (document.getElementById("pricing-config")) { try { initPricing(); } catch(e){console.warn(e)} return; }
+  if (document.getElementById("contact-form")) { try { initContact(); } catch(e){console.warn(e)} return; }
+
+  // Fallback to pathname (for PJAX swaps where DOM not yet updated)
   const clean = stripBase(window.location.pathname.replace(/\/$/, "") || "/");
   const base = clean.split("?")[0];
   if (base === "/" || base === "/index" || base === "/index.html") initHome();
@@ -41,10 +50,6 @@ function boot() {
   else if (base === "/services" || base === "/services.html") initServices();
   else if (base === "/pricing" || base === "/pricing.html") initPricing();
   else if (base === "/contact" || base === "/contact.html") initContact();
-
-  // Wire WhatsApp CTAs globally (fallback)
-  // is handled per-page, but ensure after PJAX swap we re-boot
-  // Router will call boot on navigate via custom event
 }
 
 // Expose for router PJAX to re-boot without dynamic import
