@@ -266,6 +266,16 @@ body{ padding-top: 76px; }
   align-items: stretch;
   gap: 4px;
   box-shadow: 0 -8px 24px rgba(27,26,31,0.06);
+  view-transition-name: bottom-nav;
+}
+.navbar{ view-transition-name: navbar; }
+::view-transition-group(navbar),
+::view-transition-group(bottom-nav){
+  animation: none;
+}
+::view-transition-image-pair(navbar),
+::view-transition-image-pair(bottom-nav){
+  animation: none;
 }
 .bottom-nav a{
   flex: 1;
