@@ -2,7 +2,7 @@ import { getWebsiteByCode, WEBSITES } from "../data/websites.js";
 import { formatRupiah } from "../utils/currency.js";
 import { buildWhatsappLink, orderMessage } from "../utils/whatsapp.js";
 import { websiteCardHtml } from "../components/website-card.js";
-import { stripBase } from "../utils/base.js";
+import { stripBase, withBase } from "../utils/base.js";
 
 const CHECK_SVG = `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 10.5l3 3 7-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
@@ -30,7 +30,7 @@ function renderNotFound() {
     <div class="empty-state container">
       <h3>Website tidak ditemukan</h3>
       <p>Produk yang Anda cari mungkin sudah tidak tersedia.</p>
-      <a href="catalog" class="btn btn-primary" style="margin-top:16px;">Kembali ke Katalog</a>
+      <a href="${withBase("/catalog")}" class="btn btn-primary" style="margin-top:16px;">Kembali ke Katalog</a>
     </div>
   `;
 }
@@ -134,6 +134,10 @@ function render() {
   const elIncluded = document.getElementById("detail-included");
   const elSuited = document.getElementById("detail-suited");
   const crumb = document.getElementById("detail-title-crumb");
+
+  // Harden breadcrumb link — fixes relative "catalog" resolving to /detail/catalog under PJAX
+  const crumbLink = document.querySelector(".detail-crumb a");
+  if (crumbLink) crumbLink.setAttribute("href", withBase("/catalog"));
 
   if (elCode) elCode.textContent = site.code;
   if (elTitle) elTitle.textContent = site.name;

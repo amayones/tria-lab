@@ -119,7 +119,8 @@ function shouldBypass(anchor) {
   if (anchor.hasAttribute("data-no-router")) return true;
   if (anchor.hasAttribute("download")) return true;
   try {
-    const u = new URL(href, window.location.href);
+    // Use anchor.href which respects <base> tag — fixes relative "catalog" from /detail/TRIA-xxx
+    const u = new URL(anchor.href, document.baseURI);
     if (u.origin !== window.location.origin) return true;
   } catch { return true; }
   return false;
@@ -322,7 +323,8 @@ function initRouter() {
     const href = anchor.getAttribute("href");
     if (!href || href.startsWith("#")) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    const targetUrl = new URL(href, window.location.href);
+    // Use anchor.href to respect <base href> — "catalog" from /detail/TRIA-004 must resolve to /catalog not /detail/catalog
+    const targetUrl = new URL(anchor.href, document.baseURI);
     const curUrl = new URL(window.location.href);
     if (targetUrl.pathname === curUrl.pathname && targetUrl.search === curUrl.search && targetUrl.hash) return;
 
@@ -336,7 +338,7 @@ function initRouter() {
     if (!a || shouldBypass(a)) return;
     const href = a.getAttribute("href");
     if (!href) return;
-    const url = new URL(href, window.location.href).href;
+    const url = new URL(a.href, document.baseURI).href;
     clearTimeout(hoverTimer);
     hoverTimer = setTimeout(() => prefetch(url), 80);
   });
@@ -345,7 +347,7 @@ function initRouter() {
     if (!a || shouldBypass(a)) return;
     const href = a.getAttribute("href");
     if (!href) return;
-    prefetch(new URL(href, window.location.href).href);
+    prefetch(new URL(a.href, document.baseURI).href);
   });
 
   window.addEventListener("popstate", () => {
