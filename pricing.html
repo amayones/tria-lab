@@ -1,57 +1,72 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<script>(function(){var p=location.pathname;var b="/";if(p.startsWith("/tria-lab/")||p==="/tria-lab")b="/tria-lab/";var e=document.createElement("base");e.href=location.origin+b;document.head.prepend(e);})();</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pricing — TRIA LAB</title>
-<meta name="description" content="Paket harga transparan untuk website bisnis Anda dari TRIA LAB." />
-<link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+<meta name="description" content="Pay As You Go — pilih fitur website sesuai kebutuhan dan dapatkan estimasi harga realtime dari TRIA LAB." />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="/assets/css/style.css" />
+<link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 <div id="progress-bar" aria-hidden="true"></div>
 <div id="navbar-root"></div>
 
 <main id="app">
-  <div class="page-header">
+  <div class="page-header pricing-header">
     <div class="container">
-      <h1>Pricing</h1>
-      <p>Pilih paket yang sesuai dengan kebutuhan dan skala bisnis Anda.</p>
+      <p class="kicker">Pay As You Go</p>
+      <h1>Build Your Website</h1>
+      <p class="pricing-subtitle">Pilih fitur dan kebutuhan website Anda. Harga akan dihitung otomatis sesuai requirement yang dipilih.</p>
+      <div class="pricing-intro">
+        <p>Setiap website memiliki kebutuhan yang berbeda. Dengan Pay As You Go, Anda hanya membayar fitur dan layanan yang Anda pilih.</p>
+      </div>
     </div>
   </div>
 
-  <section>
+  <section class="pricing-builder-section">
+    <div class="container pricing-builder" id="pricing-builder">
+      <!-- LEFT: Configuration -->
+      <div class="pricing-config" id="pricing-config"></div>
+      <!-- RIGHT: Summary desktop -->
+      <aside class="pricing-summary" id="pricing-summary" aria-live="polite"></aside>
+    </div>
+
     <div class="container">
-      <div class="pricing-grid" id="pricing-grid"></div>
-      <p class="pricing-note">Domain dan hosting dapat ditambahkan sesuai kebutuhan.</p>
+      <p class="pricing-disclaimer">Harga yang ditampilkan merupakan estimasi awal. Harga final dapat berubah berdasarkan kompleksitas desain, integrasi, kebutuhan bisnis, dan requirement teknis.</p>
     </div>
   </section>
 
   <section style="padding-top:0;">
     <div class="cta-section">
-      <h2>Butuh paket yang lebih spesifik?</h2>
-      <p>Konsultasikan kebutuhan Anda dan dapatkan penawaran yang sesuai.</p>
+      <h2>Masih bingung memilih fitur?</h2>
+      <p>Tim TRIA LAB siap membantu menentukan kombinasi yang paling efisien untuk bisnis Anda.</p>
       <div class="cta-actions">
-        <a href="/contact" class="btn btn-primary">Konsultasikan Kebutuhan</a>
+        <a href="contact" class="btn btn-outline">Hubungi Kami</a>
+        <a href="catalog" class="btn btn-primary">Lihat Katalog</a>
       </div>
     </div>
   </section>
 </main>
 
+<!-- Mobile fixed bottom bar -->
+<div class="mobile-summary-bar" id="mobile-summary-bar" aria-live="polite"></div>
+
 <div id="footer-root"></div>
 
 <script type="module">
-  import { renderNavbar } from "/assets/js/components/navbar.js";
-  import { renderFooter } from "/assets/js/components/footer.js";
+  import { renderNavbar } from "./assets/js/components/navbar.js";
+  import { renderFooter } from "./assets/js/components/footer.js";
   renderNavbar("pricing");
   renderFooter();
 </script>
-<script type="module" src="/assets/js/utils/router.js"></script>
+<script type="module" src="assets/js/utils/router.js"></script>
 <script type="module">
-  import { initPricing } from "/assets/js/pages/pricing.js";
+  import { initPricing } from "./assets/js/pages/pricing.js";
   initPricing();
 </script>
 </body>

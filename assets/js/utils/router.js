@@ -7,6 +7,26 @@ window.__routerEnabled = true;
 const CACHE = new Map();
 let isNavigating = false;
 
+function getBasePrefix() {
+  const p = window.location.pathname;
+  if (p.startsWith("/tria-lab/") || p === "/tria-lab") return "/tria-lab";
+  return "";
+}
+function stripBase(path) {
+  const base = getBasePrefix();
+  if (base && path.startsWith(base)) {
+    const stripped = path.slice(base.length) || "/";
+    return stripped.startsWith("/") ? stripped : "/" + stripped;
+  }
+  return path;
+}
+function withBase(path) {
+  const base = getBasePrefix();
+  if (!base) return path;
+  if (path.startsWith("/")) return base + path;
+  return base + "/" + path;
+}
+
 // Clean URL -> file mapping (for fetch)
 const CLEAN_MAP = {
   "/": "/index.html",
@@ -20,27 +40,25 @@ const CLEAN_MAP = {
 function toFileUrl(cleanUrl) {
   try {
     const u = new URL(cleanUrl, window.location.href);
-    const path = u.pathname.replace(/\/$/, "") || "/";
+    const rawPath = u.pathname.replace(/\/$/, "") || "/";
+    const path = stripBase(rawPath);
     // /detail/:code -> /website-detail.html?code=:code
     if (path.startsWith("/detail/")) {
       const code = path.split("/").pop();
-      // preserve existing search if any, but code takes precedence
       const sp = new URLSearchParams(u.search);
       if (code) sp.set("code", code);
-      return `/website-detail.html?${sp.toString()}`;
+      return withBase(`/website-detail.html?${sp.toString()}`);
     }
     if (path === "/detail") {
-      // /detail without code -> treat as catalog? fallback to website-detail without code (will show not found)
       const sp = u.search;
-      return `/website-detail.html${sp}`;
+      return withBase(`/website-detail.html${sp}`);
     }
     if (CLEAN_MAP[path]) {
-      return CLEAN_MAP[path] + u.search;
+      return withBase(CLEAN_MAP[path] + u.search);
     }
-    // legacy .html stays as-is
-    if (path.endsWith(".html")) return u.pathname + u.search;
-    // unknown clean path -> return as-is (will 404 and fallback)
-    return u.pathname + u.search;
+    // legacy .html stays as-is (preserve base)
+    if (path.endsWith(".html")) return withBase(path + u.search);
+    return withBase(path + u.search);
   } catch {
     return cleanUrl;
   }
@@ -49,23 +67,27 @@ function toFileUrl(cleanUrl) {
 function toCleanUrl(fileUrl) {
   try {
     const u = new URL(fileUrl, window.location.href);
-    const path = u.pathname;
-    if (path === "/index.html" || path === "/index") return "/" + u.search;
-    if (path === "/catalog.html") return "/catalog" + u.search;
-    if (path === "/services.html") return "/services" + u.search;
-    if (path === "/pricing.html") return "/pricing" + u.search;
-    if (path === "/contact.html") return "/contact" + u.search;
+    const rawPath = u.pathname;
+    const path = stripBase(rawPath);
+    const base = getBasePrefix();
+    const prefix = base || "";
+    if (path === "/index.html" || path === "/index") return (prefix || "") + "/" + u.search;
+    if (path === "/catalog.html") return prefix + "/catalog" + u.search;
+    if (path === "/services.html") return prefix + "/services" + u.search;
+    if (path === "/pricing.html") return prefix + "/pricing" + u.search;
+    if (path === "/contact.html") return prefix + "/contact" + u.search;
     if (path === "/website-detail.html") {
       const code = u.searchParams.get("code");
-      if (code) return `/detail/${code}`;
-      return "/detail" + u.search;
+      if (code) return prefix + `/detail/${code}`;
+      return prefix + "/detail" + u.search;
     }
-    return path + u.search;
+    return prefix + path + u.search;
   } catch { return fileUrl; }
 }
 
 function getActivePage(pathname) {
-  const p = pathname.replace(/\/$/, "") || "/";
+  const raw = pathname.replace(/\/$/, "") || "/";
+  const p = stripBase(raw);
   if (p === "/" || p === "/index" || p === "/index.html") return "home";
   if (p === "/catalog" || p === "/catalog.html" || p.startsWith("/detail")) return "catalog";
   if (p.startsWith("/website-detail")) return "catalog";
@@ -80,7 +102,8 @@ function isInternalHtml(url) {
     const u = new URL(url, window.location.href);
     if (u.origin !== window.location.origin) return false;
     if (u.protocol === "mailto:" || u.protocol === "tel:") return false;
-    const path = u.pathname.replace(/\/$/, "") || "/";
+    const raw = u.pathname.replace(/\/$/, "") || "/";
+    const path = stripBase(raw);
     if (path === "/" || path === "/index" || path === "/catalog" || path === "/services" || path === "/pricing" || path === "/contact" || path.startsWith("/detail")) return true;
     if (path.endsWith(".html")) return true;
     return false;
@@ -107,7 +130,8 @@ function shouldBypass(anchor) {
 }
 
 function getPageModule(pathname) {
-  const path = pathname.replace(/\/$/, "") || "/";
+  const raw = pathname.replace(/\/$/, "") || "/";
+  const path = stripBase(raw);
   const base = path.split("?")[0];
   if (base === "/" || base === "/index" || base === "/index.html") return { path: "../pages/home.js", init: "initHome" };
   if (base === "/catalog" || base === "/catalog.html") return { path: "../pages/catalog.js", init: "initCatalog" };

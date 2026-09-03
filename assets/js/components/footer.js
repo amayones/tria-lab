@@ -1,3 +1,13 @@
+function getBasePrefix() {
+  const p = window.location.pathname;
+  if (p.startsWith("/tria-lab/") || p === "/tria-lab") return "/tria-lab";
+  return "";
+}
+function withBase(path) {
+  const base = getBasePrefix();
+  if (path.startsWith("/")) return base + path;
+  return base + "/" + path;
+}
 export function renderFooter() {
   const root = document.getElementById("footer-root");
   if (!root) return;
@@ -9,8 +19,8 @@ export function renderFooter() {
       <div class="container">
         <div class="footer__top">
           <div class="footer__brand">
-            <a href="/" class="brand">
-              <img src="/assets/img/tria-lab-icon.png" alt="" width="30" height="30" />
+            <a href="${withBase("/")}" class="brand">
+              <img src="${withBase("/assets/img/tria-lab-icon.png")}" alt="" width="30" height="30" />
               <span>TRIA LAB</span>
             </a>
             <p>Website &amp; Digital Solutions</p>
@@ -18,11 +28,11 @@ export function renderFooter() {
           <div>
             <h4>Navigasi</h4>
             <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/catalog">Catalog</a></li>
-              <li><a href="/services">Services</a></li>
-              <li><a href="/pricing">Pricing</a></li>
-              <li><a href="/contact">Contact</a></li>
+              <li><a href="${withBase("/")}">Home</a></li>
+              <li><a href="${withBase("/catalog")}">Catalog</a></li>
+              <li><a href="${withBase("/services")}">Services</a></li>
+              <li><a href="${withBase("/pricing")}">Pricing</a></li>
+              <li><a href="${withBase("/contact")}">Contact</a></li>
             </ul>
           </div>
           <div>

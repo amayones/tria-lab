@@ -1,0 +1,30 @@
+# TRIA LAB — Clean URL rewrite for Apache (works when project is subfolder /tria-lab or DocumentRoot)
+# /tria-lab/pricing -> /tria-lab/pricing.html
+# /pricing          -> /pricing.html (when DocumentRoot = tria-lab)
+# /tria-lab/detail/TRIA-001 -> /tria-lab/website-detail.html?code=TRIA-001
+
+RewriteEngine On
+
+# If requested resource exists as file or directory (assets, etc), don't rewrite
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Detail with code
+RewriteRule ^detail/([A-Za-z0-9-]+)/?$ website-detail.html?code=$1 [L,QSA]
+
+# Detail without code
+RewriteRule ^detail/?$ website-detail.html [L,QSA]
+
+# Clean URLs
+RewriteRule ^catalog/?$ catalog.html [L]
+RewriteRule ^services/?$ services.html [L]
+RewriteRule ^pricing/?$ pricing.html [L]
+RewriteRule ^contact/?$ contact.html [L]
+RewriteRule ^index/?$ index.html [L]
+
+# Optional: legacy .html -> clean URL (301) — uncomment if you want redirect
+# RewriteCond %{THE_REQUEST} \s/+tria-lab/(catalog|services|pricing|contact)\.html[\s?] [NC]
+# RewriteRule ^tria-lab/(.+)\.html$ /tria-lab/$1 [R=301,L]
+# RewriteCond %{THE_REQUEST} \s/+[^/]+\.html[\s?] [NC]
+# RewriteRule ^(.+)\.html$ /$1 [R=301,L]

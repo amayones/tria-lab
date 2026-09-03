@@ -29,3 +29,32 @@ export function orderMessage(website) {
 export function consultationMessage() {
   return "Hallo TRIA LAB, saya ingin konsultasi kebutuhan website untuk bisnis saya.";
 }
+
+/**
+ * Build WhatsApp message from Pay As You Go pricing state.
+ * @param {{ websiteTypeLabel:string, pages:number, selectedLabels:string[], maintenanceLabel:string, breakdown:{ basePrice:number, pagesCost:number, otherFeaturesCost:number, deploymentCost:number, maintenanceCost:number, total:number }, totalFormatted:string }} data
+ */
+export function buildPricingWhatsappMessage(data) {
+  const lines = [];
+  lines.push("Hallo TRIA LAB, saya ingin konsultasi kebutuhan website dengan rincian:");
+  lines.push("");
+  lines.push(`Website Type: ${data.websiteTypeLabel}`);
+  lines.push(`Jumlah Halaman: ${data.pages}`);
+  if (data.selectedLabels.length > 0) {
+    lines.push(`Fitur yang dipilih (${data.selectedLabels.length}):`);
+    for (const l of data.selectedLabels) lines.push(`- ${l}`);
+  } else {
+    lines.push("Fitur yang dipilih: (belum memilih fitur tambahan)");
+  }
+  lines.push("");
+  lines.push(`Rincian Estimasi:`);
+  lines.push(`- Website Base: ${data.breakdown.baseFormatted}`);
+  lines.push(`- Additional Pages: ${data.breakdown.pagesFormatted}`);
+  if (data.breakdown.otherFeaturesCost > 0) lines.push(`- Features: ${data.breakdown.featuresFormatted}`);
+  if (data.breakdown.deploymentCost > 0) lines.push(`- Deployment: ${data.breakdown.deploymentFormatted}`);
+  if (data.breakdown.maintenanceCost > 0) lines.push(`- Maintenance: ${data.breakdown.maintenanceFormatted}`);
+  lines.push(`Estimated Total: ${data.totalFormatted}`);
+  lines.push("");
+  lines.push("Mohon dibantu untuk quotation final. Terima kasih!");
+  return lines.join("\n");
+}
