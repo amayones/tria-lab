@@ -7,6 +7,21 @@ window.__routerEnabled = true;
 const CACHE = new Map();
 let isNavigating = false;
 
+// Suppress noisy external PerformanceObserver errors (e.g. Cloudflare/extension injecting reportAllChanges that reads startTime of undefined)
+window.addEventListener('error', (e) => {
+  const m = String(e.message || '') + String(e.error?.message || '');
+  if (m.includes('startTime') || m.includes('reportAllChanges')) {
+    e.preventDefault();
+    return true;
+  }
+});
+window.addEventListener('unhandledrejection', (e) => {
+  const m = String(e.reason?.message || e.reason || '');
+  if (m.includes('startTime') || m.includes('reportAllChanges')) {
+    e.preventDefault();
+  }
+});
+
 function getBasePrefix() {
   const p = window.location.pathname;
   if (p.startsWith("/tria-lab/") || p === "/tria-lab") return "/tria-lab";
