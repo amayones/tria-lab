@@ -1,18 +1,10 @@
+import { withBase } from "../utils/base.js";
+import { ICONS } from "../utils/icons.js";
+
 /**
  * Renders the sticky navbar into #navbar-root and wires up the mobile menu.
  * @param {string} activePage - one of "home","catalog","services","pricing","contact"
  */
-function getBasePrefix() {
-  const p = window.location.pathname;
-  if (p.startsWith("/tria-lab/") || p === "/tria-lab") return "/tria-lab";
-  return "";
-}
-function withBase(path) {
-  const base = getBasePrefix();
-  if (path.startsWith("/")) return base + path;
-  if (path.startsWith("./")) return base + path.slice(1) || base + "/";
-  return base + "/" + path;
-}
 export function renderNavbar(activePage = "") {
   const root = document.getElementById("navbar-root");
   if (!root) return;
@@ -34,19 +26,12 @@ export function renderNavbar(activePage = "") {
       .join("");
 
   const asset = (p) => withBase(p);
-  const icons = {
-    home: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 10L12 3l9 7v9a2 2 0 0 1-2 2h-2a1 1 0 0 1-1-1v-4H8v4a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2v-9Z"/></svg>`,
-    catalog: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>`,
-    services: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5Z"/><path d="M2 12l10 5 10-5"/><path d="M2 17l10 5 10-5"/></svg>`,
-    pricing: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4Z"/><path d="M9.5 11.5h5"/><path d="M12 9.5v5"/></svg>`,
-    contact: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 7l9 7 9-7"/></svg>`,
-  };
   const bottomItems = [
-    { key: "home", label: "Home", href: withBase("/"), icon: icons.home },
-    { key: "catalog", label: "Catalog", href: withBase("/catalog"), icon: icons.catalog },
-    { key: "services", label: "Services", href: withBase("/services"), icon: icons.services },
-    { key: "pricing", label: "Pricing", href: withBase("/pricing"), icon: icons.pricing },
-    { key: "contact", label: "Contact", href: withBase("/contact"), icon: icons.contact },
+    { key: "home", label: "Home", href: withBase("/"), icon: ICONS.home },
+    { key: "catalog", label: "Catalog", href: withBase("/catalog"), icon: ICONS.catalog },
+    { key: "services", label: "Services", href: withBase("/services"), icon: ICONS.services },
+    { key: "pricing", label: "Pricing", href: withBase("/pricing"), icon: ICONS.pricing },
+    { key: "contact", label: "Contact", href: withBase("/contact"), icon: ICONS.contact },
   ];
 
   // On subsequent PJAX navigations, just update active states to avoid flicker

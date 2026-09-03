@@ -1,4 +1,5 @@
 import { formatRupiah } from "../utils/currency.js";
+import { withBase, resolveAsset } from "../utils/base.js";
 
 /**
  * Renders a single website catalog card.
@@ -13,24 +14,7 @@ function resolvePreview(site, device = "desktop") {
   return site.preview;
 }
 
-function getBasePrefix() {
-  const p = window.location.pathname;
-  if (p.startsWith("/tria-lab/") || p === "/tria-lab") return "/tria-lab";
-  return "";
-}
-function withBase(path) {
-  const base = getBasePrefix();
-  if (path.startsWith("/")) return base + path;
-  return base + "/" + path;
-}
-function resolveAsset(path) {
-  if (!path) return path;
-  if (/^(https?:|data:|blob:)/.test(path)) return path;
-  if (path.startsWith("/")) return withBase(path);
-  // relative already like "assets/..." -> make absolute with base
-  if (path.startsWith("assets/")) return withBase("/" + path);
-  return path;
-}
+
 export function websiteCardHtml(site, opts = {}) {
   const { showTags = true } = opts;
   const tagsHtml = showTags

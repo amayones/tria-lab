@@ -1,0 +1,43 @@
+/* =========================================================
+   TRIA LAB — Design System
+   3 people → 3 colors → 1 studio
+   ========================================================= */
+
+:root{
+  /* Brand */
+  --violet: #7C3AED;
+  --violet-dark: #5B21B6;
+  --violet-light: #A78BFA;
+  --pink: #EC4899;
+  --pink-light: #F9A8D4;
+  --orange: #F97316;
+  --orange-light: #FDBA74;
+
+  /* Neutrals */
+  --bg: #FCFBFA;
+  --bg-alt: #F5F3F1;
+  --surface: #FFFFFF;
+  --ink: #1B1A1F;
+  --ink-soft: #4B4952;
+  --muted: #85818C;
+  --line: #E7E4E1;
+  --line-soft: #EFEDEA;
+
+  /* Gradient (used sparingly) */
+  --grad-brand: linear-gradient(120deg, var(--violet) 0%, var(--pink) 55%, var(--orange) 100%);
+  --grad-soft: linear-gradient(120deg, rgba(124,58,237,0.10) 0%, rgba(236,72,153,0.10) 55%, rgba(249,115,22,0.10) 100%);
+
+  /* Type */
+  --font-display: "Space Grotesk", "Inter", sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Shape / elevation */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 2px rgba(27,26,31,0.06), 0 1px 1px rgba(27,26,31,0.04);
+  --shadow-md: 0 8px 24px rgba(27,26,31,0.08);
+  --shadow-lg: 0 20px 48px rgba(27,26,31,0.12);
+
+  --container: 1180px;
+}

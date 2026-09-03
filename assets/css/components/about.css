@@ -1,0 +1,37 @@
+/* ---------------- About ---------------- */
+.about-wrap{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.about-copy p{ color: var(--ink-soft); font-size: 16px; margin-bottom: 16px; }
+.founders{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: -10px;
+  position: relative;
+  height: 300px;
+}
+.founder-mark{
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  box-shadow: var(--shadow-md);
+  border: 4px solid var(--bg);
+}
+.founder-mark--agus{ background: var(--violet); margin-right: -22px; z-index: 1; }
+.founder-mark--amay{ background: var(--pink); z-index: 2; width: 140px; height: 140px; }
+.founder-mark--aufa{ background: var(--orange); margin-left: -22px; z-index: 1; }
+
+@media (max-width: 860px){
+  .about-wrap{ grid-template-columns: 1fr; gap: 32px; }
+  .founders{ order: -1; height: 200px; }
+  .founder-mark{ width: 88px; height: 88px; font-size: 12px; }
+  .founder-mark--amay{ width: 104px; height: 104px; }
+}

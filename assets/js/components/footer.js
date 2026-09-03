@@ -1,13 +1,5 @@
-function getBasePrefix() {
-  const p = window.location.pathname;
-  if (p.startsWith("/tria-lab/") || p === "/tria-lab") return "/tria-lab";
-  return "";
-}
-function withBase(path) {
-  const base = getBasePrefix();
-  if (path.startsWith("/")) return base + path;
-  return base + "/" + path;
-}
+import { withBase } from "../utils/base.js";
+
 export function renderFooter() {
   const root = document.getElementById("footer-root");
   if (!root) return;

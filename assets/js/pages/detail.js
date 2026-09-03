@@ -2,14 +2,12 @@ import { getWebsiteByCode, WEBSITES } from "../data/websites.js";
 import { formatRupiah } from "../utils/currency.js";
 import { buildWhatsappLink, orderMessage } from "../utils/whatsapp.js";
 import { websiteCardHtml } from "../components/website-card.js";
+import { stripBase } from "../utils/base.js";
 
 const CHECK_SVG = `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 10.5l3 3 7-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
 function getBaseStrippedPath() {
-  const p = window.location.pathname;
-  if (p.startsWith("/tria-lab/")) return p.replace("/tria-lab", "") || "/";
-  if (p === "/tria-lab") return "/";
-  return p;
+  return stripBase(window.location.pathname);
 }
 function getCodeFromUrl() {
   // clean URL: /detail/TRIA-001 or /tria-lab/detail/TRIA-001

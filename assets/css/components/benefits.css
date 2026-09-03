@@ -1,0 +1,28 @@
+/* ---------------- Why TRIA LAB ---------------- */
+.benefit-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.benefit{
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  padding: 26px;
+}
+.benefit__icon{
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  color: #fff;
+}
+.benefit:nth-child(1) .benefit__icon{ background: var(--violet); }
+.benefit:nth-child(2) .benefit__icon{ background: var(--pink); }
+.benefit:nth-child(3) .benefit__icon{ background: var(--orange); }
+.benefit:nth-child(4) .benefit__icon{ background: var(--ink); }
+.benefit h3{ font-size: 16.5px; margin-bottom: 8px; }
+.benefit p{ font-size: 14px; color: var(--ink-soft); margin: 0; }
+
+@media (max-width: 900px){ .benefit-grid{ grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px){ .benefit-grid{ grid-template-columns: 1fr; } }

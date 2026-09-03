@@ -1,0 +1,41 @@
+/* ---------------- How it works ---------------- */
+.steps{
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.steps::before{
+  content: "";
+  position: absolute;
+  top: 21px;
+  left: 6%;
+  right: 6%;
+  height: 2px;
+  background: var(--grad-brand);
+  opacity: 0.35;
+  z-index: 0;
+}
+.step{ position: relative; z-index: 1; }
+.step__num{
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--violet);
+  color: var(--violet);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+.step:nth-child(2) .step__num{ border-color: var(--pink); color: var(--pink); }
+.step:nth-child(3) .step__num{ border-color: var(--orange); color: var(--orange); }
+.step:nth-child(4) .step__num{ border-color: var(--ink); color: var(--ink); }
+.step h3{ font-size: 17px; margin-bottom: 8px; }
+.step p{ color: var(--ink-soft); font-size: 14.5px; margin: 0; }
+
+@media (max-width: 800px){
+  .steps{ grid-template-columns: 1fr 1fr; row-gap: 40px; }
+  .steps::before{ display: none; }
+}

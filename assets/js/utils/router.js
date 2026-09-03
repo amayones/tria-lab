@@ -2,6 +2,7 @@
  * TRIA LAB — Vanilla PJAX Router + View Transition + Prefetch + Progress
  * Supports clean URLs (/catalog, /detail/TRIA-001) + legacy .html
  */
+import { getBasePrefix, stripBase, withBase } from "./base.js";
 
 window.__routerEnabled = true;
 const CACHE = new Map();
@@ -21,26 +22,6 @@ window.addEventListener('unhandledrejection', (e) => {
     e.preventDefault();
   }
 });
-
-function getBasePrefix() {
-  const p = window.location.pathname;
-  if (p.startsWith("/tria-lab/") || p === "/tria-lab") return "/tria-lab";
-  return "";
-}
-function stripBase(path) {
-  const base = getBasePrefix();
-  if (base && path.startsWith(base)) {
-    const stripped = path.slice(base.length) || "/";
-    return stripped.startsWith("/") ? stripped : "/" + stripped;
-  }
-  return path;
-}
-function withBase(path) {
-  const base = getBasePrefix();
-  if (!base) return path;
-  if (path.startsWith("/")) return base + path;
-  return base + "/" + path;
-}
 
 // Clean URL -> file mapping (for fetch)
 const CLEAN_MAP = {
