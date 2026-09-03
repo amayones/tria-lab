@@ -48,6 +48,33 @@ export function renderNavbar(activePage = "") {
     { key: "pricing", label: "Pricing", href: withBase("/pricing"), icon: icons.pricing },
     { key: "contact", label: "Contact", href: withBase("/contact"), icon: icons.contact },
   ];
+
+  // On subsequent PJAX navigations, just update active states to avoid flicker
+  if (root.dataset.initialized === "1") {
+    // Top nav
+    root.querySelectorAll(".nav-links a, .navbar a.brand").forEach((a) => {
+      const href = a.getAttribute("href");
+      const item = links.find((l) => l.href === href);
+      if (item) {
+        if (item.key === activePage) a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      }
+    });
+    // Bottom nav
+    const bottom = document.getElementById("bottom-nav");
+    if (bottom) {
+      bottom.querySelectorAll("a").forEach((a) => {
+        const href = a.getAttribute("href");
+        const item = bottomItems.find((b) => b.href === href);
+        if (item) {
+          if (item.key === activePage) a.setAttribute("aria-current", "page");
+          else a.removeAttribute("aria-current");
+        }
+      });
+    }
+    return;
+  }
+
   const bottomHtml = bottomItems
     .map(
       (it) => `<a href="${it.href}" ${it.key === activePage ? 'aria-current="page"' : ""} aria-label="${it.label}">${it.icon}<span>${it.label}</span></a>`
@@ -70,4 +97,5 @@ export function renderNavbar(activePage = "") {
       ${bottomHtml}
     </nav>
   `;
+  root.dataset.initialized = "1";
 }
