@@ -196,6 +196,20 @@ function parseHtml(htmlText) {
 }
 
 async function runPageInit(pathname) {
+  // Bundled mode: use window.__triaBoot / __triaPageMap (single-file mystery)
+  if (window.__triaBoot) {
+    try {
+      const modInfo = getPageModule(pathname);
+      if (!modInfo) return;
+      const map = window.__triaPageMap || {};
+      const fn = map[modInfo.init];
+      if (typeof fn === "function") await fn();
+      window.dispatchEvent(new CustomEvent("tria:navigated"));
+      return;
+    } catch (e) {
+      console.warn("[router] bundled init failed", e);
+    }
+  }
   const modInfo = getPageModule(pathname);
   if (!modInfo) return;
   try {
@@ -208,6 +222,14 @@ async function runPageInit(pathname) {
 }
 
 async function updateNavbar(pathname) {
+  if (window.__triaBoot) {
+    try {
+      // navbar is also bundled, but keep dynamic fallback
+      const { renderNavbar } = await import("../components/navbar.js");
+      renderNavbar(getActivePage(pathname));
+    } catch {}
+    return;
+  }
   try {
     const { renderNavbar } = await import("../components/navbar.js");
     renderNavbar(getActivePage(pathname));

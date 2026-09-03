@@ -33,7 +33,7 @@ Update `WHATSAPP_NUMBER` in `assets/js/utils/whatsapp.js` (currently a placehold
 
 Product thumbnails in `assets/img/previews/` are stylized placeholder mockups generated for this build — swap in real screenshots of each website (same filenames, or update the `preview` path in `websites.js`) once available. For the desktop/tablet/mobile views on the detail page, add real screenshots at different widths if you want distinct crops per device (currently all three reuse the same preview image).
 
-## Running locally
+## Running locally (dev — readable source)
 
 No build step required. Serve the folder with any static server, e.g.:
 
@@ -41,8 +41,21 @@ No build step required. Serve the folder with any static server, e.g.:
 python3 -m http.server 8080
 ```
 
-Then open `http://localhost:8080`.
+Then open `http://localhost:8080`. Data di `assets/js/data/*.js` masih plain untuk kemudahan edit.
+
+## Mystery Build (production — samarkan Network & Source)
+
+Untuk penampilan misterius-profesional (Network tab hanya `tria.app.min.js` gibberish, harga & katalog ter-encode):
+
+```
+npm install          # sekali saja
+npm run build        # -> assets/dist/tria.app.min.js (obfuscated + vault)
+```
+
+HTML sudah memakai `assets/dist/tria.app.min.js`. Data asli (`assets/js/data/*.js`, `scripts/`, `vault.js`) otomatis ter-block via `.htaccess` & Worker (`404`) di production. Untuk update konten, edit `assets/js/data/websites.js` / `pricing-config.js` lalu `npm run build` ulang.
+
+Dev bundle tanpa obfuscate: `npm run build:dev`
 
 ## Deploying
 
-Upload the whole folder as-is to any static host (Apache, Nginx, Netlify, Vercel static, GitHub Pages, shared hosting via FTP). No server-side processing is required.
+Upload the whole folder as-is to any static host (Apache, Nginx, Netlify, Vercel static, GitHub Pages, shared hosting via FTP). No server-side processing is required. Pastikan `assets/dist/tria.app.min.js` sudah ter-build sebelum upload (jalankan `npm run build`).

@@ -26,6 +26,17 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/$/, "") || "/";
 
+    // Mystery: block direct vault/data leaks (bundled in /assets/dist/tria.app.min.js)
+    if (
+      path.startsWith("/assets/js/data/") ||
+      path === "/assets/js/bundle.entry.js" ||
+      path === "/assets/js/utils/vault.js" ||
+      path.startsWith("/scripts/") ||
+      path.startsWith("/tmp/")
+    ) {
+      return new Response("Not Found", { status: 404 });
+    }
+
     // 301 legacy .html -> clean
     if (path.endsWith(".html")) {
       const clean = toClean(path, url.search);

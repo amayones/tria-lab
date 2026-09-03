@@ -1,0 +1,16 @@
+{
+  "name": "tria-lab",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js",
+    "build:dev": "node scripts/build.js --dev",
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "esbuild": "^0.23.0",
+    "javascript-obfuscator": "^4.1.0",
+    "terser": "^5.31.0"
+  }
+}

@@ -5,6 +5,22 @@
 
 RewriteEngine On
 
+# --- TRIA LAB Mystery: block direct access to raw data/source ---
+# Vault data is bundled+obfuscated in assets/dist/tria.app.min.js; direct .js data leaks are forbidden
+RewriteRule ^assets/js/data/.*$ - [F,L]
+RewriteRule ^assets/js/bundle\.entry\.js$ - [F,L]
+RewriteRule ^assets/js/utils/vault\.js$ - [F,L]
+RewriteRule ^scripts/.*$ - [F,L]
+RewriteRule ^tmp/.*$ - [F,L]
+
+# Security headers (professional)
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
 # If requested resource exists as file or directory (assets, etc), don't rewrite
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
