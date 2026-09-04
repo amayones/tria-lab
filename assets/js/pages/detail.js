@@ -2,7 +2,7 @@ import { getWebsiteByCode, WEBSITES } from "../data/websites.js";
 import { formatRupiah } from "../utils/currency.js";
 import { buildWhatsappLink, orderMessage } from "../utils/whatsapp.js";
 import { websiteCardHtml } from "../components/website-card.js";
-import { stripBase, withBase } from "../utils/base.js";
+import { stripBase, withBase, resolveAsset } from "../utils/base.js";
 
 const CHECK_SVG = `<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 10.5l3 3 7-7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
@@ -49,9 +49,8 @@ function renderRelated(site) {
 }
 
 function getPreviewForDevice(site, device) {
-  if (site.previews && site.previews[device]) return site.previews[device];
-  // fallback to legacy single preview
-  return site.preview;
+  const raw = site.previews && site.previews[device] ? site.previews[device] : site.preview;
+  return resolveAsset(raw);
 }
 
 function getDemoHref(site) {

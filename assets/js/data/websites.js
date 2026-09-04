@@ -17,19 +17,29 @@ export const CATEGORIES = [
 export const WEBSITES = [
   {
     code: "TRIA-001",
-    name: "Modern Coffee",
+    name: "KOFFe Text",
     category: "Coffee Shop",
     price: 1499000,
-    description: "Website hangat dan modern untuk coffee shop dengan menu digital dan galeri suasana.",
-    tags: ["Responsive", "WhatsApp", "Google Maps", "Gallery"],
-    preview: "assets/img/previews/coffee-1.svg",
+    description:
+      "Coffee shop hangat & modern untuk WFC — hero Brew & Write, katalog menu filterable (Espresso, Manual Brew, Pastry), fasilitas work-from-coffee, dan reservasi meja online dengan konfirmasi modal.",
+    tags: ["React", "Vite", "Tailwind"],
+    demoUrl: "https://koffe-text.vercel.app/",
+    preview: "assets/img/previews-catalog/koffet-desktop.png",
+    previews: {
+      desktop: "assets/img/previews-catalog/koffet-desktop.png",
+      tablet: "assets/img/previews-catalog/koffet-tablet.png",
+      mobile: "assets/img/previews-catalog/koffet-mobile.png",
+    },
     features: [
-      "Responsive Design",
-      "WhatsApp Integration",
-      "Google Maps",
-      "Gallery",
-      "Contact Section",
-      "Basic SEO",
+      "React 19 + Vite + Tailwind CSS 4",
+      "React Router 7 + AOS Animations",
+      "Fully Responsive (Mobile, Tablet, Desktop)",
+      "Sticky Navbar + Backdrop Blur + Drawer Mobile + CTA Pesan Meja/Kopi",
+      "Katalog Menu Filterable — All, Espresso Based, Manual Brew, Non-Coffee, Pastry & Snack",
+      "Section Tentang — Biji Kopi Kurasi, Zona Fokus WFC & Galeri 2 Kolom",
+      "Form Reservasi Lengkap — Nama, WhatsApp, Tanggal, Jam, Pilihan Area & Catatan Khusus",
+      "Modal Konfirmasi Reservasi via Context API (Nama, Area, Pesan Personal)",
+      "Footer Lengkap — Navigasi, Jam Operasional (Senin-Minggu) & Lokasi Jl. Bunga Kopi No. 12 Jakarta",
     ],
     included: [
       "Website sesuai desain",
@@ -40,7 +50,7 @@ export const WEBSITES = [
       "Revision sesuai paket",
       "Basic support",
     ],
-    suitedFor: ["Coffee Shop", "Restaurant", "Cafe", "Food Business"],
+    suitedFor: ["Coffee Shop", "WFC Cafe", "Cafe Modern", "Resto & Coffee Bar"],
   },
   {
     code: "TRIA-002",
