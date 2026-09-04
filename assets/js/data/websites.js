@@ -97,13 +97,14 @@ export const WEBSITES = [
     suitedFor: ["Startup", "Konsultan", "Manufaktur", "Perusahaan Jasa"],
   },
   {
-  code: "TRIA-004",
+   code: "TRIA-004",
   name: "Rumah Hati",
   category: "Property",
   price: 2499000,
   description:
     "Katalog properti editorial premium — sampul hero full-screen, sorotan edisi, galeri scroll koleksi terpilih, panel pembiayaan, dan direktori advisor privat.",
   tags: ["Next.js", "FastA", "Tailwind", "Property", "Premium"],
+  demoUrl: "https://rumah-hati.vercel.app/",
   preview: "assets/img/previews-catalog/rumahhati-desktop.png",
   previews: {
     desktop: "assets/img/previews-catalog/rumahhati-desktop.png",
@@ -135,13 +136,14 @@ export const WEBSITES = [
   suitedFor: ["Perumahan Premium", "Agen Properti", "Villa & Resort", "Apartemen Penthouse"],
 },
   {
-  code: "TRIA-005",
+   code: "TRIA-005",
   name: "SageLife Medical",
   category: "Clinic",
   price: 2299000,
   description:
     "Website klinik keluarga yang tenang & bersahabat — jadwal dokter hari ini, 6 layanan unggulan, profil dokter, dan booking janji temu online 24 jam.",
   tags: ["Astro", "Laravel", "Tailwind", "Clinic", "Booking Online", "WhatsApp"],
+  demoUrl: "https://sagelife.vercel.app/",
   preview: "assets/img/previews-catalog/sagelife-desktop.png",
   previews: {
     desktop: "assets/img/previews-catalog/sagelife-desktop.png",
@@ -181,13 +183,14 @@ export const WEBSITES = [
   suitedFor: ["Klinik Keluarga", "Praktik Dokter", "Klinik Gigi", "Klinik Anak"],
 },
   {
-  code: "TRIA-006",
+   code: "TRIA-006",
   name: "Future Lesson",
   category: "Education",
   price: 2199000,
   description:
     "Platform kursus online praktis untuk skill yang langsung terpakai — katalog kelas dengan filter kategori, jadwal live hari ini, mentor praktisi, dan pendaftaran via WhatsApp.",
   tags: ["Angular", "Laravel", "Tailwind", "Course Platform", "WhatsApp"],
+  demoUrl: "https://futurel.vercel.app/",
   preview: "assets/img/previews-catalog/futureles-desktop.png",
   previews: {
     desktop: "assets/img/previews-catalog/futureles-desktop.png",

@@ -27,6 +27,7 @@ export function websiteCardHtml(site, opts = {}) {
   // Jika mau card ikut previews.desktop, ganti jadi resolvePreview(site, "desktop")
   const rawThumb = site.preview || resolvePreview(site, "desktop");
   const thumbSrc = resolveAsset(rawThumb);
+  const demoHref = site.demoUrl || site.demo || thumbSrc;
 
   return `
     <article class="wcard">
@@ -46,7 +47,7 @@ export function websiteCardHtml(site, opts = {}) {
           <small>Harga mulai</small>
         </div>
         <div class="wcard__actions">
-          <a href="${thumbSrc}" class="btn btn-outline" target="_blank" rel="noopener">Live Demo</a>
+          <a href="${demoHref}" class="btn btn-outline" target="_blank" rel="noopener">Live Demo</a>
           <a href="${withBase(`/detail/${site.code}`)}" class="btn btn-primary">Lihat Detail</a>
         </div>
       </div>

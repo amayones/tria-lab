@@ -54,6 +54,13 @@ function getPreviewForDevice(site, device) {
   return site.preview;
 }
 
+function getDemoHref(site) {
+  if (site.demoUrl) return site.demoUrl;
+  if (site.demo) return site.demo;
+  // fallback to preview image if no live URL configured
+  return getPreviewForDevice(site, "desktop");
+}
+
 function preloadImage(src) {
   return new Promise((resolve) => {
     const img = new Image();
@@ -93,7 +100,7 @@ function wireDeviceTabs(site) {
       frame.classList.remove("is-switching");
       frame.classList.add("is-entering");
       document.querySelectorAll("[data-demo-cta]").forEach((el) => {
-        el.setAttribute("href", src);
+        el.setAttribute("href", getDemoHref(site));
       });
       setTimeout(() => {
         frame.classList.remove("is-entering");
@@ -166,7 +173,7 @@ function render() {
     el.setAttribute("rel", "noopener");
   });
   document.querySelectorAll("[data-demo-cta]").forEach((el) => {
-    el.setAttribute("href", getPreviewForDevice(site, "desktop"));
+    el.setAttribute("href", getDemoHref(site));
     el.setAttribute("target", "_blank");
     el.setAttribute("rel", "noopener");
   });
